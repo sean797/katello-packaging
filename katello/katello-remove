@@ -83,7 +83,7 @@ RPMS=(
     `rpm -qa | grep foreman-client`
     `rpm -qa | grep foreman-proxy`
     `rpm -qa | grep candlepin`
-    `rpm -qa | grep katello`
+    `rpm -qa | grep -P '(?!.*katello-common)katello'`
     `rpm -qa | grep ^pulp`
     `rpm -qa | grep ^python-pulp`
     `rpm -qa | grep ^pulp-`
@@ -179,3 +179,6 @@ rm -rf ${CERT_FILES[*]}
 echo "Cleaning up content"
 #content
 rm -rf ${CONTENT[*]}
+
+echo "Success! Removing katello-common"
+yum erase -y `rpm -qa | grep katello-common`
